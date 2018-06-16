@@ -2,13 +2,14 @@
 from urllib.parse import urlencode
 from .web_request import json_request
 
-ACCESS_TOKEN = "EAACEdEose0cBAMqjagSZBoe7s9akBG2vZB3gWkb0w9GZCRdrCOu22BkLkRl4OMos1XUHwbR8F9lh3ViEzZBqErHQ9wFZCZBr0WQ46OctEUJ90uvyTTO2RJ5mABNImmltd8QOryhhN7GSUfFK2lZAeEylIJhZAOZBGiYNuOYXxmQdpJUiXvwNCT7heZAvIMkyrYtyX0lnBCTh0MJr1DTu5DlHiO2zuW3CqgaSUZD"
+ACCESS_TOKEN = "EAACEdEose0cBAMuvMZCSB4fSV4ZA2OEFeGsEXYAR72sKl6BjTmjSk6DbFQr6rnZBGraZB0ge6HNl5Evsg2bi6eof7LYvafK4KsEoJYiHX9rXyZBuvZCnQcnZA7rcxGC0UzZA1o5r0ZAjUFBWzLI18EZAEuO7VOtkLZBPXxNSsTMTthyqjqmYyGzTAl6OjTNlV12OV9N96d4CtINDzuguuwlBBrE4gbDvvgEtvoZD"
 BASE_URL_FB_API = "https://graph.facebook.com/v3.0"
+
 def fb_gen_url(
         base=BASE_URL_FB_API,
         node='',
         **params):
-    url = '%s/%s/?%s' % (base,node, urlencode(params));
+    url = '%s/%s/?%s' % (base,node, urlencode(params))
     return url
 
 def fb_name_to_id(pagename):
@@ -25,16 +26,12 @@ def fb_fetch_posts(pagename, since, until):
                      limit=50,
                      access_token=ACCESS_TOKEN)
 
-    # results = []
     isnext = True
     while isnext is True:
         json_result = json_request(url=url)
 
         paging = None if json_result is None else json_result.get('paging')
         posts = None if json_result is None else json_result.get('data')
-
-        # results.append(posts)
-        # results += posts
 
         url = None if paging is None else paging.get("next")
         isnext = url is not None

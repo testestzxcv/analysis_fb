@@ -26,11 +26,10 @@ def html_request(
 
 
 def json_request(
-    url='',
-    encoding='utf-8',
-    success=None,
-    error=lambda e: print('%s %s' % (e, datetime.now()), file=sys.stderr)):
-
+        url='',
+        encoding='utf-8',
+        success=None,
+        error=lambda e: print('%s %s' % (e, datetime.now()), file=sys.stderr)):
     try:
         request = Request(url)
         resp = urlopen(request)
@@ -38,7 +37,7 @@ def json_request(
 
         json_result = json.loads(resp_body)
 
-        print('%s : success for request[%s]' % (datetime.now(),url))
+        print('%s : success for request[%s]' % (datetime.now(), url))
 
         if callable(success) is False:  # 함수가 아니면
             return json_result
