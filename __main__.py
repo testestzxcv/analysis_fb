@@ -28,5 +28,13 @@ if __name__ == '__main__':
 
         filename = "%s_%s_%s" % (item['pagename'], item['since'], item['until'])
         visualize.wordcloud(filename, count_m50)
-        # visualize.graph_bar()
+        visualize.graph_bar(
+            title='%s 빈도분석' % (item['pagename']),
+            xlabel='단어',
+            ylabel='빈도',
+            values=list(count_m50.values()),
+            ticks=list(count_m50.keys()),
+            showgrid=False,  # 그리드 그리기
+            filename=filename,
+            showgraph=False)
 
